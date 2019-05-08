@@ -1,0 +1,15 @@
+schemaVersion: "1.0.0"
+
+fileExistenceTests:
+- name: 'Go SDK'
+  path: '/usr/local/go/'
+  shouldExist: true
+
+- name: 'Go Build Script'
+  path: '/usr/local/bin/go-build.sh'
+  shouldExist: true
+  permissions: '-rwxr-xr-x'
+
+licenseTests:
+- debian: false
+  files: []

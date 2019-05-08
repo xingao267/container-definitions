@@ -1,0 +1,23 @@
+steps:
+- name: "gcr.io/kaniko-project/executor"
+  args: [
+    "--dockerfile=Dockerfile",
+    "--context=/workspace",
+    "-d", "gcr.io/asci-toolchain/xingao-go-builder:latest",
+    "--build-arg", "go_version=1.12.4",
+    "--build-arg", "go_sha256=d7d1f1f88ddfe55840712dc1747f37a790cbcaa448f6c9cf51bbe10aa65442f5",
+    "--build-arg", "distroless_digest=sha256:1d71e323557502cc78ee6c237331a09b0c33ba59c14e5f683da3b1c6218779cc",
+    "--build-arg", "base_digest=sha256:43d07992f6ed5d1ff1d48baac5ba9cfc10f1f190b12188dc0641e6341f5e3c59",
+    "--build-arg", "build_tag=latest",
+    "--no-push",
+    "--reproducible",
+  ]
+
+- name: "gcr.io/gcp-runtimes/structure_test"
+  args: [
+    "-i", "gcr.io/asci-toolchain/xingao-go-builder:latest",
+    "-v",
+    "--config", "/workspace/test_config.yaml"
+  ]
+
+images: ["gcr.io/asci-toolchain/xingao-go-builder:latest"]
